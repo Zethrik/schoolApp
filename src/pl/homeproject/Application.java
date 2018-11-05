@@ -10,22 +10,36 @@ public class Application {
 
         do {
             printMentu();
-            System.out.print("Twój wybór: ");
+            System.out.print("\nTwój wybór: ");
             userSelection = getUserInt();
+            System.out.println();
             switch (userSelection) {
+                case 1:
+                    System.out.print("Podaj maks punktów: ");
+                    int maxPoints = getUserInt();
+                    Utils.countStandardScoring(maxPoints);
+                    pause();
+                    break;
+                case 2:
+                    System.out.print("Podaj maks punktów: ");
+                    int maxPoints2 = getUserInt();
+                    Utils.countFixedScoring(maxPoints2);
+                    pause();
+                    break;
                 case 3:
-                    System.out.print("\nLiczba dni: ");
+                    System.out.print("Liczba dni: ");
                     int daysInt = getUserInt();
                     double daysDouble = (double) daysInt;
                     System.out.print("Liczba godzin: ");
                     double hours = getUserDouble();
                     Utils.countOvertime(daysDouble, hours);
+                    pause();
                     break;
                 case 0:
-                    System.out.println("\nDo zobaczenia");
+                    System.out.println("Do zobaczenia");
                     break;
                 default:
-                    System.out.println("\nBłędny wybór\n");
+                    System.out.println("Błędny wybór\n");
             }
 
         } while (userSelection != 0);
@@ -33,7 +47,7 @@ public class Application {
     }
 
     private void printMentu() {
-        System.out.println("1) Punktacja zwykła");
+        System.out.println("\n1) Punktacja zwykła");
         System.out.println("2) Punktacja dostosowana");
         System.out.println("3) Nadgodziny");
         System.out.println("0) Wyjdź");
@@ -53,7 +67,12 @@ public class Application {
         try {
             return Double.parseDouble(userInput);
         } catch (NumberFormatException ex) {
-            return 100000;
+            return -1;
         }
+    }
+
+    private void pause() {
+        System.out.println("\nEnter, by kontynuować");
+        scanner.nextLine();
     }
 }
